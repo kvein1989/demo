@@ -1,16 +1,19 @@
 package com.jokul.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 import com.jokul.domain.User;
+import com.jokul.utils.page.Pagination;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -41,7 +44,8 @@ public class UserDaoImpl implements UserDao {
 			public int getBatchSize() {
 				return list.size();
 			}
-		});*/
+		});
+		return 0;*/
 		
 		return jdbcTemplate.update(sql, params);
 	}
@@ -73,8 +77,13 @@ public class UserDaoImpl implements UserDao {
 		return user;
 	}
 
-	public List<User> list() {
+	public Pagination<User> list() {
+		String sqlCount = "select count(*) from user";
 		String sql = "select userid,username,password from user";
+		
+		Pagination<User> pagination = new Pagination<User>();
+		Integer total = jdbcTemplate.queryForInt(sqlCount);
+		pagination.setFullListSize(total);
 		
 		final List<User> list = new ArrayList<User>();
 		jdbcTemplate.query(sql, new Object[]{}, new RowCallbackHandler() {
@@ -87,7 +96,8 @@ public class UserDaoImpl implements UserDao {
 				list.add(user);
 			}
 		});
-		return list;
+		pagination.setList(list);
+		return pagination;
 	}
 
 }

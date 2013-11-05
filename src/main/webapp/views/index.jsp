@@ -169,7 +169,7 @@ body {
 	<div id="layout1">
 		<div position="left" title="菜单管理">
 			 <div title="系统管理">
-			 	<a class="l-link" href="javascript:f_addTab('studentList','用户管理','${path }/user/v_list.do')">用户管理</a>
+			 	<a class="l-link" href="javascript:f_addTab('studentList','用户管理','${path }/user/list.do')">用户管理</a>
 			 </div>
 		</div>
 		<div position="center" id="framecenter">

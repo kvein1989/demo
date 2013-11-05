@@ -1,8 +1,7 @@
 package com.jokul.dao;
 
-import java.util.List;
-
 import com.jokul.domain.User;
+import com.jokul.utils.page.Pagination;
 
 public interface UserDao {
 
@@ -14,5 +13,5 @@ public interface UserDao {
 	
 	public User getById(Integer userId);
 	
-	public List<User> list();
+	public Pagination<User> list();
 }

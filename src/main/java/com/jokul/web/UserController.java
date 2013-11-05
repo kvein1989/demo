@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.jokul.domain.User;
 import com.jokul.service.UserService;
+import com.jokul.utils.page.Pagination;
 
 @Controller
 @RequestMapping("/user")
@@ -53,16 +54,11 @@ public class UserController {
 		return "redirect:/user/list.do";
 	}
 	
-	@RequestMapping(value = "/v_list")
-	public String v_list() {
+	@RequestMapping("/list")
+	public String list(ModelMap map,String page) {
+		Pagination<User> users = userService.list();
+		map.addAttribute("users", users);
 		return "user/userList";
-	}
-	
-	@RequestMapping("/o_list")
-	@ResponseBody
-	public List<User> o_list(ModelMap map) {
-		List<User> users = userService.list();
-		return users;
 	}
 	
 	@RequestMapping("/detail")

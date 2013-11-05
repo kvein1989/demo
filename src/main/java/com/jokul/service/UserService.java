@@ -1,8 +1,7 @@
 package com.jokul.service;
 
-import java.util.List;
-
 import com.jokul.domain.User;
+import com.jokul.utils.page.Pagination;
 
 public interface UserService {
 
@@ -14,5 +13,5 @@ public interface UserService {
 
 	public User getById(Integer userId);
 
-	public List<User> list();
+	public Pagination<User> list();
 }

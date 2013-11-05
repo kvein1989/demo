@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.jokul.dao.UserDao;
 import com.jokul.domain.User;
+import com.jokul.utils.page.Pagination;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.getById(userId);
 	}
 
-	public List<User> list() {
+	public Pagination<User> list() {
 		return userDao.list();
 	}
 
