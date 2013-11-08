@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -77,16 +78,23 @@ public class UserDaoImpl implements UserDao {
 		return user;
 	}
 
-	public Pagination<User> list() {
-		String sqlCount = "select count(*) from user";
-		String sql = "select userid,username,password from user";
+	public Pagination<User> list(User user, String page) {
+		StringBuilder sqlCount = new StringBuilder("select count(*) from user");
+		StringBuilder sqlList = new StringBuilder("select * from user");
 		
 		Pagination<User> pagination = new Pagination<User>();
-		Integer total = jdbcTemplate.queryForInt(sqlCount);
+		Integer total = jdbcTemplate.queryForInt(sqlCount.toString());
 		pagination.setFullListSize(total);
 		
+		if(StringUtils.isBlank(page)) {
+			pagination.setPageNumber(1);
+		} else {
+			pagination.setPageNumber(Integer.parseInt(page));
+		}
+		sqlList.append(" limit " + pagination.getObjectsPerPage() * (pagination.getPageNumber() - 1) + "," + pagination.getObjectsPerPage());
+		
 		final List<User> list = new ArrayList<User>();
-		jdbcTemplate.query(sql, new Object[]{}, new RowCallbackHandler() {
+		jdbcTemplate.query(sqlList.toString(), new Object[]{}, new RowCallbackHandler() {
 			
 			public void processRow(ResultSet rs) throws SQLException {
 				User user = new User();

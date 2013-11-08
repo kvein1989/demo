@@ -55,8 +55,8 @@ public class UserController {
 	}
 	
 	@RequestMapping("/list")
-	public String list(ModelMap map,String page) {
-		Pagination<User> users = userService.list();
+	public String list(ModelMap map,String page,User user) {
+		Pagination<User> users = userService.list(user, page);
 		map.addAttribute("users", users);
 		return "user/userList";
 	}

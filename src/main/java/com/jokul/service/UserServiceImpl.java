@@ -1,7 +1,5 @@
 package com.jokul.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +29,8 @@ public class UserServiceImpl implements UserService {
 		return userDao.getById(userId);
 	}
 
-	public Pagination<User> list() {
-		return userDao.list();
+	public Pagination<User> list(User user, String page) {
+		return userDao.list(user, page);
 	}
 
 }

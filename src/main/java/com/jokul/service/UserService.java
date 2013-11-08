@@ -13,5 +13,5 @@ public interface UserService {
 
 	public User getById(Integer userId);
 
-	public Pagination<User> list();
+	public Pagination<User> list(User user, String page);
 }
