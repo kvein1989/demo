@@ -11,7 +11,31 @@ import com.jokul.utils.page.Pagination;
 
 public class MenuDaoImpl implements MenuDao {
 
-	@Autowired
+	@Override
+	public Integer insert(Menu menu) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer delete(Integer menuId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer update(Menu menu) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Pagination<Menu> list(Menu menu, String page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/*@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
@@ -59,6 +83,6 @@ public class MenuDaoImpl implements MenuDao {
 		}
 		
 		return pagination;
-	}
+	}*/
 
 }
