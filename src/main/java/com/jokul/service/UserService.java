@@ -5,11 +5,11 @@ import com.jokul.utils.page.Pagination;
 
 public interface UserService {
 
-	public int add(User user);
+	public void add(User user);
 
-	public int update(User user);
+	public void update(User user);
 
-	public int delete(Integer userId);
+	public void delete(Integer userId);
 
 	public User getById(Integer userId);
 

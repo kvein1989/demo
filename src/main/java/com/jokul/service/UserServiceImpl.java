@@ -13,16 +13,16 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 	
-	public int add(User user) {
-		return userDao.add(user);
+	public void add(User user) {
+		userDao.add(user);
 	}
 
-	public int update(User user) {
-		return userDao.update(user);
+	public void update(User user) {
+		userDao.update(user);
 	}
 
-	public int delete(Integer userId) {
-		return userDao.delete(userId);
+	public void delete(Integer userId) {
+		userDao.delete(userId);
 	}
 
 	public User getById(Integer userId) {

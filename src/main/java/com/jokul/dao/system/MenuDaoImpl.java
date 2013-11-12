@@ -1,30 +1,41 @@
 package com.jokul.dao.system;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.jokul.domain.Menu;
-import com.jokul.utils.page.Paginable;
 import com.jokul.utils.page.Pagination;
 
+@Repository
 public class MenuDaoImpl implements MenuDao {
+	
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	@Override
-	public Integer insert(Menu menu) {
+	public void insert(Menu menu) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	public Integer delete(Integer menuId) {
+	public void delete(Integer menuId) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
 
 	@Override
-	public Integer update(Menu menu) {
+	public void update(Menu menu) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Menu getById(Integer menuId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -35,54 +46,15 @@ public class MenuDaoImpl implements MenuDao {
 		return null;
 	}
 
-	/*@Autowired
-	private JdbcTemplate jdbcTemplate;
-
+	@SuppressWarnings("unchecked")
 	@Override
-	public Integer insert(Menu menu) {
-		String sql = "insert into menu (menu_name,menu_url,is_leaf,parent_id,sort) value (?,?,?,?,?)";
-		Object[] params = new Object[] { menu.getMenuName(), menu.getMenuUrl(),
-				menu.getIsLeaf(), menu.getParentId(), menu.getSort() };
-		return jdbcTemplate.update(sql, params);
+	public List<Menu> tree(Integer menuId) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		List<Menu> list = session.createQuery("from Menu")
+				.list();
+		return list;
 	}
 
-	@Override
-	public Integer delete(Integer menuId) {
-		String sql = "delete from menu where menu_id = ?";
-		return jdbcTemplate.update(sql,new Object[menuId]);
-	}
-
-	@Override
-	public Integer update(Menu menu) {
-		String sql = "update menu set menu_name = ?, menu_url = ?, is_leaf = ?, sort = ? where menu_id = ?";
-		Object[] params = new Object[]{menu.getMenuName(),menu.getMenuUrl(),menu.getIsLeaf(),
-				menu.getSort(),menu.getMenuId()};
-		return jdbcTemplate.update(sql, params);
-	}
-
-	@Override
-	public Pagination<Menu> list(Menu menu, String page) {
-		StringBuilder sqlCount = new StringBuilder("select count(*) from menu ");
-		StringBuilder sqlList = new StringBuilder("select * from menu ");
-		StringBuilder condition = new StringBuilder(" where ");
-		condition.append(" parent_id = ?");
-		Object[] params = new Object[]{menu.getParentId()};
-		
-		Pagination<Menu> pagination = new Pagination<Menu>();
-		Paginable<Menu> paginable = new Paginable<Menu>(pagination);
-		paginable.setPage(page);
-		sqlCount.append(condition);
-		sqlList.append(condition).append(paginable.getLimit());
-		
-		Integer count = jdbcTemplate.queryForInt(sqlCount.toString(), params);
-		pagination.setFullListSize(count);
-		if(count < 1) {
-			pagination.setList(new ArrayList<Menu>());
-		} else {
-			
-		}
-		
-		return pagination;
-	}*/
 
 }
