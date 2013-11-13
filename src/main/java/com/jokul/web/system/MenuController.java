@@ -17,6 +17,11 @@ public class MenuController {
 	
 	@Autowired
 	private MenuService menuService;
+	
+	@RequestMapping(value = "main")
+	public String main() {
+		return "system/menu/menuTree";
+	}
 
 	@RequestMapping(value = "tree")
 	@ResponseBody
