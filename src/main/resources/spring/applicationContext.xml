@@ -27,11 +27,12 @@
 		<property name="mappingResources">
 			<list>
 				<value>hbm/Menu.hbm.xml</value>
+				<value>hbm/User.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<value>
-				hibernate.dialect=org.hibernate.dialect.HSQLDialect
+				hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 			</value>
 		</property>
 	</bean>

@@ -1,7 +1,5 @@
 package com.jokul.dao;
 
-import java.util.List;
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jokul.domain.User;
+import com.jokul.utils.page.Paginable;
 import com.jokul.utils.page.Pagination;
 
 @Repository
@@ -59,10 +58,11 @@ public class UserDaoImpl implements UserDao {
 	public Pagination<User> list(User user, String page) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		Query query = session.createQuery("from user");
-		query.setFirstResult(0);
+		Query query = session.createQuery("from User");
+		Paginable<User> paginable = new Paginable<User>();
+		Pagination<User> pagination = paginable.paging(query, page);
 		session.getTransaction().commit();
-		return null;
+		return pagination;
 	}
 	
 }
