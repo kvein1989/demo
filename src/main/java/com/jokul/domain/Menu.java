@@ -1,7 +1,11 @@
 package com.jokul.domain;
 
-public class Menu {
+import java.io.Serializable;
 
+public class Menu implements Serializable {
+
+	private static final long serialVersionUID = 8383660414444208284L;
+	
 	private Integer menuId;// ID
 	private String menuName;// 菜单名称
 	private String menuUrl;// 菜单路径

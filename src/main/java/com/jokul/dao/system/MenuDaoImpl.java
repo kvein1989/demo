@@ -36,8 +36,12 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public Menu getById(Integer menuId) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		Menu menu = (Menu) session.get(Menu.class, menuId);
+		session.getTransaction().commit();
+		session.close();
+		return menu;
 	}
 
 	@Override
@@ -53,6 +57,8 @@ public class MenuDaoImpl implements MenuDao {
 		session.beginTransaction();
 		List<Menu> list = session.createQuery("from Menu")
 				.list();
+		session.getTransaction().commit();
+		session.close();
 		return list;
 	}
 

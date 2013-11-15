@@ -34,7 +34,8 @@
 				}
 			},
 			callback: {
-				onRightClick: OnRightClick
+				onRightClick: OnRightClick,
+				onClick: zTreeOnClick
 			}
 		};
 
@@ -46,6 +47,10 @@
 				zTree.selectNode(treeNode);
 				showRMenu("node", event.clientX, event.clientY);
 			}
+		}
+		
+		function zTreeOnClick(event, treeId, treeNode) {
+			$("#myFrame").attr("src","${path}/system/menu/detail.do?menuId=" + treeNode.menuId);
 		}
 
 		function showRMenu(type, x, y) {
@@ -121,13 +126,16 @@
 			cursor: pointer;
 			list-style: none outside none;
 			background-color: #DFDFDF;
-}
+		}
 	</style>
 </head>
 <body>
-	<div class="content_wrap">
+	<div class="content_wrap" style="width: 100%;">
 		<div class="zTreeDemoBackground left">
 			<ul id="menuTree" class="ztree"></ul>
+		</div>
+		<div style="margin-left:255px;width: 100%;">
+			<iframe id="myFrame" style="width: 100%;" src="${path }/system/menu/detail.do"></iframe>
 		</div>
 	</div>
 	<div id="rMenu">

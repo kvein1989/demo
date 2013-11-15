@@ -19,4 +19,9 @@ public class MenuServiceImpl implements MenuService {
 		return menuDao.tree(menuId);
 	}
 
+	@Override
+	public Menu getById(Integer menuId) {
+		return menuDao.getById(menuId);
+	}
+
 }

@@ -47,8 +47,7 @@ public class UserDaoImpl implements UserDao {
 	public User getById(Integer userId) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		User user = (User) session.load(User.class, userId);
-		session.delete(userId);
+		User user = (User) 	session.get(User.class, userId);
 		session.getTransaction().commit();
 		session.close();
 		return user;

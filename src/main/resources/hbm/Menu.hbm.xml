@@ -6,7 +6,7 @@
     <class name="com.jokul.domain.Menu" table="MENU">
         <id name="menuId" type="java.lang.Integer">
             <column name="menu_id" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="menuName" type="java.lang.String">
             <column name="menu_name" />
