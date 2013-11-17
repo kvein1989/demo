@@ -10,6 +10,7 @@
 <body>
 	<form action="${path }/system/menu/o_add.do" method="post">
 		<table>
+			<input type="hidden" name="parentId" value="${menuId }">
 			<tr>
 				<td>菜单名称:</td>
 				<td>

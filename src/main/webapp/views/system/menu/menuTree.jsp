@@ -13,7 +13,6 @@
 	<script type="text/javascript" src="${path }/resources/jquery/tree/js/jquery.ztree.excheck-3.5.js"></script>
 	<script type="text/javascript" src="${path }/resources/jquery/tree/js/jquery.ztree.exedit-3.5.js"></script>
 	<SCRIPT type="text/javascript">
-		<!--
 		var setting = {
 			view: {
 				dblClickExpand: false
@@ -55,7 +54,8 @@
 
 		function showRMenu(type, x, y) {
 			$("#rMenu ul").show();
-			if (isLeaf=="0" && parentId == "-1") {
+			if (type=="root") {
+				$("#m_update").hide();
 				$("#m_del").hide();
 			} else {
 				$("#m_del").show();
@@ -76,13 +76,8 @@
 		var addCount = 1;
 		function addTreeNode() {
 			hideRMenu();
-			var newNode = { name:"增加" + (addCount++)};
-			if (zTree.getSelectedNodes()[0]) {
-				newNode.checked = zTree.getSelectedNodes()[0].checked;
-				zTree.addNodes(zTree.getSelectedNodes()[0], newNode);
-			} else {
-				zTree.addNodes(null, newNode);
-			}
+			var nodes = zTree.getSelectedNodes()[0];
+			$("#myFrame").attr("src","${path}/system/menu/v_add.do?menuId=" + nodes.menuId);
 		}
 		function removeTreeNode() {
 			hideRMenu();
@@ -91,9 +86,11 @@
 				if (nodes[0].children && nodes[0].children.length > 0) {
 					var msg = "要删除的节点是父节点，如果删除将连同子节点一起删掉。\n\n请确认！";
 					if (confirm(msg)==true){
+						$("#myFrame").attr("src","${path}/system/menu/delete.do?menuId=" + nodes[0].menuId + "&parentId=" + nodes[0].parentId);
 						zTree.removeNode(nodes[0]);
 					}
 				} else {
+					$("#myFrame").attr("src","${path}/system/menu/delete.do?menuId=" + nodes[0].menuId + "&parentId=" + nodes[0].parentId);
 					zTree.removeNode(nodes[0]);
 				}
 			}
@@ -116,7 +113,6 @@
 			zTree = $.fn.zTree.getZTreeObj("menuTree");
 			rMenu = $("#rMenu");
 		});
-		//-->
 	</SCRIPT>
 	<style type="text/css">
 		div#rMenu {position:absolute; visibility:hidden; top:0; background-color: #555;text-align: left;padding: 2px;}
@@ -141,6 +137,7 @@
 	<div id="rMenu">
 		<ul>
 			<li id="m_add" onclick="addTreeNode();">增加节点</li>
+			<li id="m_update" onclick="updateTreeNode();">修改节点</li>
 			<li id="m_del" onclick="removeTreeNode();">删除节点</li>
 		</ul>
 	</div>

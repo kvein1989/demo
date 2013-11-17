@@ -19,4 +19,23 @@ public interface MenuService {
 	 * @return
 	 */
 	public Menu getById(Integer menuId);
+	
+	/**
+	 * 添加菜单
+	 * @param menu
+	 * @return
+	 */
+	public Integer insert(Menu menu);
+	
+	/**
+	 * 更新菜单
+	 * @param menu
+	 */
+	public void update(Menu menu);
+	
+	/**
+	 * 删除菜单
+	 * @param menuId
+	 */
+	public void delete(Integer menuId);
 }

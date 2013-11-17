@@ -44,18 +44,77 @@ public class MenuController {
 		return list;
 	}
 	
+	/**
+	 * 菜单详情页面
+	 * @param menuId
+	 * @param map
+	 * @return
+	 */
 	@RequestMapping(value = "detail")
 	public String detail(Integer menuId, ModelMap map) {
+		if(menuId == null) {
+			menuId = 1;
+		}
 		Menu menu = menuService.getById(menuId);
 		map.addAttribute("menu", menu);
 		return "system/menu/menuDetail";
 	}
 	
-	public String v_add() {
+	/**
+	 * 进入添加页面
+	 * @return
+	 */
+	@RequestMapping(value = "v_add")
+	public String v_add(Integer menuId, ModelMap map) {
+		map.addAttribute("menuId", menuId);
 		return "system/menu/menuAdd";
 	}
 	
+	/**
+	 * 添加菜单
+	 * @param menu
+	 * @return
+	 */
+	@RequestMapping(value = "o_add")
 	public String o_add(Menu menu) {
-		return "";
+		Integer menuId = menuService.insert(menu);
+		return "redirect:/system/menu/detail.do?menuId=" + menuId;
+	}
+	
+	/**
+	 * 进入修改页面
+	 * @param menuId
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping(value = "v_update")
+	public String v_update(Integer menuId, ModelMap map) {
+		Menu menu = menuService.getById(menuId);
+		
+		map.addAttribute("menu", menu);
+		return "system/menu/menuUpdate";
+	}
+	
+	/**
+	 * 对菜单进行更新操作
+	 * @param menu
+	 * @return
+	 */
+	@RequestMapping(value = "o_update")
+	public String o_update(Menu menu) {
+		menuService.update(menu);
+		return "redirect:/system/menu/v_update.do?menuId=" + menu.getMenuId();
+	}
+	
+	/**
+	 * 删除菜单
+	 * @param menuId
+	 * @param parentId
+	 * @return
+	 */
+	@RequestMapping(value = "delete")
+	public String delete(Integer menuId, Integer parentId) {
+		menuService.delete(menuId);
+		return "redirect:/system/menu/detail.do?menuId=" + parentId;
 	}
 }

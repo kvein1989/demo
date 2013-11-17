@@ -17,21 +17,33 @@ public class MenuDaoImpl implements MenuDao {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public void insert(Menu menu) {
-		// TODO Auto-generated method stub
-		
+	public Integer insert(Menu menu) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.save(menu);
+		session.getTransaction().commit();
+		session.close();
+		return menu.getMenuId();
 	}
 
 	@Override
 	public void delete(Integer menuId) {
-		// TODO Auto-generated method stub
-		
+		Menu menu = new Menu();
+		menu.setMenuId(menuId);
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.delete(menu);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
 	public void update(Menu menu) {
-		// TODO Auto-generated method stub
-		
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		session.update(menu);
+		session.getTransaction().commit();
+		session.close();
 	}
 
 	@Override
@@ -42,12 +54,6 @@ public class MenuDaoImpl implements MenuDao {
 		session.getTransaction().commit();
 		session.close();
 		return menu;
-	}
-
-	@Override
-	public Pagination<Menu> list(Menu menu, String page) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table style="width: 90%;border: 1;">
+	<table style="width: 90%;border-width: 1px;">
 		<tr>
 			<td style="width: 20%;text-align: right;border: 1">菜单名称</td>
 			<td>${menu.menuName }</td>
