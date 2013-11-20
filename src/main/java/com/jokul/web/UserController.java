@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jokul.domain.User;
-import com.jokul.service.UserService;
-import com.jokul.utils.page.Pagination;
+import com.jokul.service.system.UserService;
 
 @Controller
 @RequestMapping("/user")
@@ -56,8 +55,6 @@ public class UserController {
 	
 	@RequestMapping("/list")
 	public String list(ModelMap map,String page,User user) {
-		Pagination<User> users = userService.list(user, page);
-		map.addAttribute("users", users);
 		return "user/userList";
 	}
 	

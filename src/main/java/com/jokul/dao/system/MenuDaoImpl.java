@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jokul.domain.Menu;
-import com.jokul.utils.page.Pagination;
 
 @Repository
 public class MenuDaoImpl implements MenuDao {

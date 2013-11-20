@@ -3,7 +3,6 @@ package com.jokul.dao.system;
 import java.util.List;
 
 import com.jokul.domain.Menu;
-import com.jokul.utils.page.Pagination;
 
 public interface MenuDao {
 
