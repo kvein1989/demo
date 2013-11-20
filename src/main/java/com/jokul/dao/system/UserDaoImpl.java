@@ -56,10 +56,6 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public DataGridResult<User> list(User user, DataGridParam param) {
 		DataGridResult<User> dataGridResult = new DataGridResult<User>();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		Query query = session.createQuery("from User");
-		session.getTransaction().commit();
 		return dataGridResult;
 	}
 	
