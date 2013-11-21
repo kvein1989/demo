@@ -1,4 +1,4 @@
-package com.jokul.web;
+package com.jokul.web.system;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import com.jokul.domain.User;
 import com.jokul.service.system.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/system/user")
 public class UserController {
 	
 	@Autowired
@@ -48,8 +48,8 @@ public class UserController {
 	}
 	
 	@RequestMapping("/delete")
-	public String delete(Integer userId) {
-		userService.delete(userId);
+	public String delete(User user) {
+		userService.delete(user);
 		return "redirect:/user/list.do";
 	}
 	

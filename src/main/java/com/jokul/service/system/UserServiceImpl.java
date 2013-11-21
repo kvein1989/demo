@@ -22,12 +22,12 @@ public class UserServiceImpl implements UserService {
 		userDao.update(user);
 	}
 
-	public void delete(Integer userId) {
-		userDao.delete(userId);
+	public void delete(User user) {
+		userDao.delete(user);
 	}
 
 	public User getById(Integer userId) {
-		return userDao.getById(userId);
+		return userDao.getById(User.class, userId);
 	}
 
 	public DataGridResult<User> list(User user,  DataGridParam param) {

@@ -1,4 +1,4 @@
-package com.jokul.web;
+package com.jokul.web.excel;
 
 import java.io.File;
 import java.io.FileInputStream;
