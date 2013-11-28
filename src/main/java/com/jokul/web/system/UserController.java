@@ -1,16 +1,14 @@
 package com.jokul.web.system;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.jokul.domain.User;
 import com.jokul.service.system.UserService;
+import com.jokul.utils.page.DataGridParam;
+import com.jokul.utils.page.DataGridResult;
 
 @Controller
 @RequestMapping("/system/user")
@@ -19,50 +17,28 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/addUI")
-	public String userAddUI() {
-		return "user/userAdd";
+	@RequestMapping("/v_add")
+	public String v_add() {
+		return "system/user/userAdd";
 	}
 	
-	@RequestMapping("/add")
-	public ModelAndView userAdd(User user) {
+	@RequestMapping(value = "/o_add")
+	@ResponseBody
+	public String o_add(User user) {
 		userService.add(user);
-		
-		ModelAndView view = new ModelAndView();
-		view.setViewName("redirect:/user/list.do");
-		view.addObject("user", user);
-		return view;
+		return "成功";
 	}
 	
-	@RequestMapping("/updateUI")
-	public String updateUI(Integer userId, ModelMap map) {
-		User user = userService.getById(userId);
-		map.addAttribute("user", user);
-		return "user/userUpdate";
+	@RequestMapping("/main")
+	public String main() {
+		return "system/user/userList";
 	}
 	
-	@RequestMapping("/update")
-	public String update(User user) {
-		userService.update(user);
-		return "redirect:/user/list.do";
-	}
-	
-	@RequestMapping("/delete")
-	public String delete(User user) {
-		userService.delete(user);
-		return "redirect:/user/list.do";
-	}
-	
-	@RequestMapping("/list")
-	public String list(ModelMap map,String page,User user) {
-		return "user/userList";
-	}
-	
-	@RequestMapping("/detail")
-	public String detail(Integer userId, ModelMap map) {
-		User user = userService.getById(userId);
-		map.addAttribute("user", user);
-		return "user/userDetail";
+	@RequestMapping(value = "/list")
+	@ResponseBody
+	public DataGridResult<User> list(DataGridParam param, User user) {
+		DataGridResult<User> result = userService.list(user, param);
+		return result;
 	}
 	
 }

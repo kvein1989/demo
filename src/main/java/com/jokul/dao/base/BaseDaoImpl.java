@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
  * @param <T>
  * @date 2013年11月21日
  */
-@Repository
 public class BaseDaoImpl<T> {
 
 	@Autowired
